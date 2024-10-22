@@ -1,24 +1,33 @@
 
-# odoo-go-client
+# odoo-models-connect
 
 Cliente en Go para conectarse a Odoo utilizando XML-RPC. Esta librería permite realizar operaciones CRUD, mapear datos a estructuras Go y procesar grandes volúmenes de datos utilizando goroutines.
 
 ## Tabla de Contenidos
 
-- [Características](#características)
-- [Requisitos](#requisitos)
-- [Instalación](#instalación)
-- [Configuración](#configuración)
-- [Uso](#uso)
-  - [Inicializar el Cliente](#inicializar-el-cliente)
-  - [Operaciones CRUD](#operaciones-crud)
-  - [Mapeo de Modelos](#mapeo-de-modelos)
-  - [Procesamiento en Paralelo con Goroutines](#procesamiento-en-paralelo-con-goroutines)
-- [Ejemplos](#ejemplos)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Notas Importantes](#notas-importantes)
-- [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
+- [odoo-models-connect](#odoo-models-connect)
+  - [Tabla de Contenidos](#tabla-de-contenidos)
+  - [Características](#características)
+  - [Requisitos](#requisitos)
+  - [Instalación](#instalación)
+  - [Configuración](#configuración)
+  - [Uso](#uso)
+    - [Inicializar el Cliente](#inicializar-el-cliente)
+    - [Operaciones CRUD](#operaciones-crud)
+      - [Crear un Registro](#crear-un-registro)
+      - [Leer Registros](#leer-registros)
+      - [Actualizar un Registro](#actualizar-un-registro)
+      - [Eliminar un Registro](#eliminar-un-registro)
+    - [Mapeo de Modelos](#mapeo-de-modelos)
+      - [Definir una Estructura](#definir-una-estructura)
+      - [Mapear Datos a la Estructura](#mapear-datos-a-la-estructura)
+    - [Procesamiento en Paralelo con Goroutines](#procesamiento-en-paralelo-con-goroutines)
+      - [Ejemplo de Procesamiento en Paralelo](#ejemplo-de-procesamiento-en-paralelo)
+  - [Ejemplos](#ejemplos)
+  - [Estructura del Proyecto](#estructura-del-proyecto)
+  - [Notas Importantes](#notas-importantes)
+  - [Contribuciones](#contribuciones)
+  - [Licencia](#licencia)
 
 ## Características
 
@@ -43,8 +52,8 @@ Cliente en Go para conectarse a Odoo utilizando XML-RPC. Esta librería permite 
 Clona este repositorio o copia los archivos necesarios en tu proyecto.
 
 ```bash
-git clone https://github.com/tuusuario/odoo-go-client.git
-cd odoo-go-client
+git clone github.com/DeijoseDevelop/odoo-models-connect.git
+cd odoo-models-connect
 ```
 
 Instala las dependencias:
@@ -79,11 +88,11 @@ package main
 
 import (
     "fmt"
-    "odoo-go-client" // Importa tu paquete adecuadamente
+    "github.com/DeijoseDevelop/odoo-models-connect" // Importa tu paquete adecuadamente
 )
 
 func main() {
-    client, err := NewOdooClient(".env")
+    client, err := odoo.NewOdooClient(".env")
     if err != nil {
         fmt.Println("Error al inicializar el cliente Odoo:", err)
         return
@@ -169,7 +178,7 @@ type ResPartner struct {
 ```go
 for _, record := range records {
     var partner ResPartner
-    if err := MapToStruct(record, &partner); err != nil {
+    if err := odoo.MapToStruct(record, &partner); err != nil {
         fmt.Println("Error al mapear el registro:", err)
         continue
     }
@@ -223,7 +232,7 @@ func main() {
             }
             for _, record := range records {
                 var partner ResPartner
-                if err := MapToStruct(record, &partner); err != nil {
+                if err := odoo.MapToStruct(record, &partner); err != nil {
                     fmt.Println("Error al mapear el registro:", err)
                     continue
                 }
@@ -245,12 +254,12 @@ func main() {
 
 ## Ejemplos
 
-Consulta el archivo `main.go` para ver ejemplos completos de cómo utilizar la librería, incluyendo operaciones CRUD y procesamiento paralelo.
+Consulta el archivo `example.go` para ver ejemplos completos de cómo utilizar la librería, incluyendo operaciones CRUD y procesamiento paralelo (si copias y pegas, agrega la palabra "odoo" antes de cada componente, ejemplo: odoo.NewOdooClient()).
 
 ## Estructura del Proyecto
 
 ```
-odoo-go-client/
+odoo-models-connect/
 ├── client.go         // Contiene OdooClient y métodos
 ├── errors.go         // Tipos de error personalizados
 ├── models.go         // Definiciones de modelos y mapeadores
