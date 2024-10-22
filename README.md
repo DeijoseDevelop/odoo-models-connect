@@ -1,7 +1,7 @@
 
 # odoo-models-connect
 
-Cliente en Go para conectarse a Odoo utilizando XML-RPC. Esta librería permite realizar operaciones CRUD, mapear datos a estructuras Go y procesar grandes volúmenes de datos utilizando goroutines.
+Cliente en Go para conectarse a Odoo utilizando XML-RPC. Esta librería permite realizar operaciones CRUD, mapear datos a estructuras Go.
 
 ## Tabla de Contenidos
 
